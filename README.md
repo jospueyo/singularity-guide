@@ -1,4 +1,5 @@
 # singularity-guide
+guide under development (2023-02-03)
 
 ## what is this guide?
 Researchers can create their own environments (also called "pipelines",
