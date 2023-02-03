@@ -50,3 +50,6 @@ If you are happy with your .sif file, just send it to the cluster and execute
 it there using the same "exec" or "shell" commands. Note that in the cluster
 you won't be able to modify it, since you won't have access to the "sudo"
 command there.
+
+##7. a more complete guide
+https://singularity-tutorial.github.io/03-building/

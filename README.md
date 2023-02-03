@@ -13,10 +13,10 @@ file) to the cluster where it can be executed, with the following advantages:
 2. create a writable container (called a "sandbox")
 3. shell ("enter") into the container with the --writable option and tinker
    with it interactively (install whatever you want)
-4. record changes that you like in your definition file
+4. record changes that you like in your definition file (optional)
 5. rebuild the container from the definition file if you break it
 6. rinse and repeat until you are happy with the result
 7. rebuild the container from the final definition file as a read-only
    singularity image format (SIF) image for use in the cluster
 8. send this .SIF file to the cluster, and execute it there using singularity.
-   To send the file you can use the typical "ftp" or "scp" programs.
+   You can use the typical "ftp" or "scp" programs.
