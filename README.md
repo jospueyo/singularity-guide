@@ -19,4 +19,5 @@ file) to the cluster where it can be executed, with the following advantages:
 6. rinse and repeat until you are happy with the result
 7. rebuild the container from the final definition file as a read-only
    singularity image format (SIF) image for use in the cluster
-8. send this .SIF file to the cluster, and execute it there using singularity
+8. send this .SIF file to the cluster, and execute it there using singularity.
+   To send the file you can use the typical "ftp" or "scp" programs.
