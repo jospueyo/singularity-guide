@@ -20,7 +20,7 @@ sudo apt install -y \
 ```sh
 git clone --recurse-submodules https://github.com/sylabs/singularity.git
 cd singularity
-git checkout --recurse-submodules v3.11.0-rc.1
+git checkout --recurse-submodules v3.11.0
 ```
 
 ## 3. compile singularity:
