@@ -2,8 +2,9 @@
 A user needed a container running:
 - postgresql
 - postgis
-to remotely access a server, and have the ability to install extensions, and
-let the cluster do the computation.
+
+so he could access a remote database, and have the ability to install
+extensions, and let the cluster do the computation.
 
 ## step 1: download the official postgis container image and create a sandbox to configure it
 ```
