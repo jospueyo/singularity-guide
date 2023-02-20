@@ -52,7 +52,7 @@ Singularity> exit
 ## Step 6: run the container
 At this point we can compile the sandbox to a .sif file and send it to the cluster (see "how to create a container" for instructions).
 
-In the cluster, we create an instance of the container, mapping the "internal" port (5432) to the "external" port (from the host) 54320:
+In the cluster, we create an instance of the container, mapping the "internal" port (5432) to the "external" port (from the host) 54320. You can choose whatever external port you want:
 ```
 $ singularity instance start --writable-tmpfs \
   --net --network-args "portmap=54320:5432/tcp" \
