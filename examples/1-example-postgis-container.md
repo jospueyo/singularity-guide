@@ -30,7 +30,7 @@ Singularity> vim pg_hba.conf               #edit file: allow remote access from 
 Singularity> su postgres -c "pg_ctl start" #start postgresql service
 ```
 
-## Step 4: setup postgres' user password
+## Step 4: setup access password
 log in into the psql console:
 ```
 Singularity> su postgres -c psql
