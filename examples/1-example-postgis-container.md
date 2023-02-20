@@ -3,7 +3,7 @@ A user needed a remote service running:
 - postgresql
 - postgis
 
-So he could access a remote database, and have the ability to create databases,
+So he could access it and have the ability to create databases,
 tables, install extensions, and also let the cluster do all the computation.
 
 This is the summarized list of steps that were needed to configure and run a
@@ -23,7 +23,7 @@ $ sudo singularity shell --writable pgcontainer/
 
 ## Step 3: configure postgresql files
 ```
-Singularity> su postgres -c "initdb"       #populate the $PGDATA folder (default is /var/lib/postgresql/data)
+Singularity> su postgres -c initdb         #populate the $PGDATA folder (default is /var/lib/postgresql/data)
 Singularity> cd $PGDATA                    #go to the $PGDATA folder
 Singularity> vim postgresql.conf           #edit file: enable the listen port to "5432"
 Singularity> vim pg_hba.conf               #edit file: allow remote access from all hosts ("0.0.0.0/0")
@@ -33,7 +33,7 @@ Singularity> su postgres -c "pg_ctl start" #start postgresql service
 ## Step 4: setup postgres' user password
 log in into the psql console:
 ```
-Singularity> su postgres -c "psql"
+Singularity> su postgres -c psql
 ```
 In the psql console, change the password and quit:
 ```
