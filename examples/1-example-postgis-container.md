@@ -54,10 +54,12 @@ At this point we can compile the sandbox to a .sif file and send it to the clust
 
 In the cluster, we create an instance of the container, mapping the "internal" port (5432) to the "external" port (from the host) 54320:
 ```
-$ singularity instance start --writable-tmpfs --net --network-args "portmap=54320:5432/tcp" pgcontainer/ pgcontainer
+$ singularity instance start --writable-tmpfs \
+  --net --network-args "portmap=54320:5432/tcp" \
+  pgcontainer/ pgcontainer
 ```
-The pgcontainr instance will need to be able to write to disk, so we’ve used
-the --writable-tmpfs argument to allocate some space in memory.
+The instance will need to write to disk, so we’ve used the
+--writable-tmpfs argument to allocate some space in memory.
 
 The --net and --network-args options allow the incoming traffic follow this path:
 
