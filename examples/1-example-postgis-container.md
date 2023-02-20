@@ -67,7 +67,7 @@ The --net and --network-args options allow the incoming traffic follow this path
 request --> [cluster_ip_address:54320  -->  container_ip_address:5432]
 ```
 
-Now we enter the container instance and start the postgresql service:
+Finall, we enter the container instance and start the postgresql service:
 ```
 $ singularity shell instance://pgcontainer
 Singularity> su postgres -c "pg_ctl start"
