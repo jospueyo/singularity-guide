@@ -1,28 +1,32 @@
 # example of successful container creation and usage
-A user needed a container running:
+A user needed a remote service running:
 - postgresql
 - postgis
 
 so he could access a remote database, and have the ability to install
 extensions, and let the cluster do the computation.
 
+This is the list of steps that were needed to configure and run the container
+in the ICRA's HPC cluster.
+
 ## step 1: download the official postgis container image and create a sandbox to configure it
 ```
 $ sudo singularity build --sandbox pgcontainer docker://postgis/postgis
 ```
-"pgcontainer" was the name chosen for this example, but it can be any name
+"pgcontainer" was the name chosen for this example, but it can be any name.
+This command creates the folder "pgcontainer", which is the sandbox itself.
 
-## step 2: enter the container using --writable mode
+## step 2: enter the sandbox container using --writable mode
 ```
 $ sudo singularity shell --writable pgcontainer/
 ```
 
 ## step 3: configure postgresql files
 ```
-Singularity> cd /var/lib/postgresql/data   #this is the default $PGDATA folder
-Singularity> vim postgresql.conf           #edit file to setup listen port to "5432"
-Singularity> vim pg_hba.conf               #edit file to setup remote access from all hosts ("0.0.0.0/0")
-Singularity> su postgres -c "initdb"       #populate the $PGDATA folder
+Singularity> su postgres -c "initdb"       #populate the $PGDATA folder (default is /var/lib/postgresql/data)
+Singularity> cd $PGDATA                    #go to the $PGDATA folder
+Singularity> vim postgresql.conf           #edit file: enable the listen port to "5432"
+Singularity> vim pg_hba.conf               #edit file: allow remote access from all hosts ("0.0.0.0/0")
 Singularity> su postgres -c "pg_ctl start" #start postgresql
 ```
 
@@ -31,27 +35,32 @@ log in into the psql console:
 ```
 Singularity> su postgres -c "psql"
 ```
-Then in the psql console, change the password and quit:
+In the psql console, change the password and quit:
 ```
 postgres=# \password postgres
 Enter new password: <new-password>
 postgres=# \q
 ```
 
-## step 5: if everything works, exit the container
+## step 5: exit the sandbox container
 ```
 Singularity> su postgres -c "pg_ctl stop"
 Singularity> exit
 ```
 
 ## step 6: run the container
-create an instance of the container and map the port 5432 from the containre to the port 54320 from the host:
+create an instance of the container, mapping the "internal" port (5432) to the "external" port (from the host) 54320:
 ```
 $ singularity instance start --writable-tmpfs --net --network-args "portmap=54320:5432/tcp" pgcontainer/ pgcontainer
 ```
 The pgcontainr instance will need to be able to write to disk, so we’ve used
 the --writable-tmpfs argument to allocate some space in memory.
-Now we enter the container and start postgresql:
+
+The --net and --network-args options allow the incoming traffic follow this path:
+
+request --> [cluster_address:54320] --> [container_address:5432]
+
+Now we enter the container and start the postgresql service:
 ```
 $ singularity shell instance://pgcontainer
 Singularity> su postgres -c "pg_ctl start"
@@ -83,6 +92,8 @@ unix  2      [ ACC ]     STREAM     LISTENING     34074696 /var/run/postgresql/.
 ```
 
 ## step 8: connect remotely to the container using psql or pgAdmin in your local machine
+If everything worked, now we should be able to connect to the container from the outside:
+
 - Host name/address: the remote IP of your cluster
 - Port: 54320 (or whatever you set in the step 6)
 - Username: postgres
