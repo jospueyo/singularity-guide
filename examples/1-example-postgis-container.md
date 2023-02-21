@@ -110,8 +110,9 @@ Proto RefCnt Flags       Type       State         I-Node   Path
 unix  2      [ ACC ]     STREAM     LISTENING     34074696 /var/run/postgresql/.s.PGSQL.5432
 ```
 
-## Step 9: We can connect remotely to the container using psql or pgAdmin in our local machine
-If everything works, now we are able to connect to the container from the outside:
+## Step 9: access the database
+If everything worked fine, now we should be able to access the database in the
+container using a client (e.g. psql or pgAdmin).
 
 - Host name/address: the remote IP of your cluster
 - Port: 54320 (or whatever you set in the step 6)
