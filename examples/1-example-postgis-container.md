@@ -50,7 +50,7 @@ Singularity> su postgres -c "pg_ctl stop"
 Singularity> exit
 ```
 
-## Step 6: build the image file from the sandbox
+## Step 6: create an image file from the sandbox
 At this point we can compile the sandbox to a .sif file
 (see "how to create a container" for more details).
 ```
@@ -60,7 +60,7 @@ Now we just need to send the pgcontainer.sif file to the cluster. There are a
 lot of options to do this, but one I like is magic-wormhole (pip install
 magic-wormhole)
 
-## Step 7: run an instance from the image
+## Step 7: run a new instance from the image file
 In the cluster, we create an instance of the container, mapping the "internal"
 port (5432) to the "external" (from the host) port 54320. You can choose
 whatever external port you want, as long it is available:
