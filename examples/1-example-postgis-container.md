@@ -16,6 +16,9 @@ $ sudo singularity build --sandbox pgcontainer docker://postgis/postgis
 This command creates a folder called "pgcontainer",
 but you can choose any name for it.
 
+Reference for the postgis container:
+https://registry.hub.docker.com/r/postgis/postgis/
+
 ## Step 2: enter the sandbox container using --writable mode
 ```
 $ sudo singularity shell --writable pgcontainer/
