@@ -26,17 +26,17 @@ Now we are inside the container.
 ```
 Singularity> su postgres -c initdb         #populate the $PGDATA folder (default is /var/lib/postgresql/data)
 Singularity> cd $PGDATA                    #go to the $PGDATA folder
-Singularity> vim postgresql.conf           #edit file: enable the listen port to "5432"
+Singularity> vim postgresql.conf           #edit file: set the listening port to "5432"
 Singularity> vim pg_hba.conf               #edit file: allow remote access from all hosts (add the line "host all all 0.0.0.0/0 md5")
 Singularity> su postgres -c "pg_ctl start" #start postgresql service
 ```
 
 ## Step 4: setup access password
-log in into the psql console:
+Log in into the psql console:
 ```
 Singularity> su postgres -c psql
 ```
-In the psql console, change the password and quit:
+Change the password and quit:
 ```
 postgres=# \password postgres
 Enter new password: <new-password>
@@ -50,9 +50,17 @@ Singularity> su postgres -c "pg_ctl stop"
 Singularity> exit
 ```
 
-## Step 6: run the container
-At this point we can compile the sandbox to a .sif file and send it to the cluster (see "how to create a container" for instructions).
+## Step 6: build the image file from the sandbox
+At this point we can compile the sandbox to a .sif file
+(see "how to create a container" for more details).
+```
+$ sudo singularity build pgcontainer.sif pgcontainer/
+```
+Now we just need to send the pgcontainer.sif file to the cluster. There are a
+lot of options to do this, but one I like is magic-wormhole (pip install
+magic-wormhole)
 
+## Step 7: build the image file from the sandbox
 In the cluster, we create an instance of the container, mapping the "internal"
 port (5432) to the "external" (from the host) port 54320. You can choose
 whatever external port you want, as long it is available:
@@ -61,13 +69,14 @@ $ singularity instance start --writable-tmpfs \
   --net --network-args "portmap=54320:5432/tcp" \
   pgcontainer/ pgcontainer
 ```
-The instance will need to write to disk, so we’ve used the
+The instance will need to write to disk, so we use the
 --writable-tmpfs argument to allocate some space in memory.
 
 The --net and --network-args options allow the incoming traffic follow this path:
-
 ```
-request --> [cluster_ip_address:54320  -->  container_ip_address:5432]
+            +--------------------------------------------------------+
+request --> | cluster_ip_address:54320 --> container_ip_address:5432 |
+            +--------------------------------------------------------+
 ```
 
 Finally, we enter the container instance and start the postgresql service:
@@ -76,7 +85,7 @@ $ singularity shell instance://pgcontainer
 Singularity> su postgres -c "pg_ctl start"
 ```
 
-## Step 7: final checks
+## Step 8: final checks
 We check the postgresql status inside the container:
 ```
 Singularity> su postgres -c "pg_ctl status"
@@ -101,8 +110,8 @@ Proto RefCnt Flags       Type       State         I-Node   Path
 unix  2      [ ACC ]     STREAM     LISTENING     34074696 /var/run/postgresql/.s.PGSQL.5432
 ```
 
-## Step 8: We can connect remotely to the container using psql or pgAdmin in our local machine
-If everything worked, now we should be able to connect to the container from the outside:
+## Step 9: We can connect remotely to the container using psql or pgAdmin in our local machine
+If everything works, now we are able to connect to the container from the outside:
 
 - Host name/address: the remote IP of your cluster
 - Port: 54320 (or whatever you set in the step 6)
