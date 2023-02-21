@@ -29,7 +29,7 @@ Singularity> su postgres -c initdb         #populate the $PGDATA folder (default
 Singularity> cd $PGDATA                    #go to the $PGDATA folder
 Singularity> vim postgresql.conf           #edit file: set the listening port to "5432"
 Singularity> vim pg_hba.conf               #edit file: allow remote access from all hosts (add the line "host all all 0.0.0.0/0 md5")
-Singularity> su postgres -c "pg_ctl start" #start postgresql service
+Singularity> su postgres -c "pg_ctl start" #start postgresql service as the "postgres" user
 ```
 
 ## Step 4: setup access password
