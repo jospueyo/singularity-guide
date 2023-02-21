@@ -119,10 +119,11 @@ unix  2      [ ACC ]     STREAM     LISTENING     34074696 /var/run/postgresql/.
 
 ## Step 9: access the database
 If everything worked fine, now we should be able to access the database in the
-container using a client (e.g. psql or pgAdmin).
+container using a client (e.g. psql, pgAdmin), or from python (library
+psycopg2)
 
-- Host name/address: the remote IP of your cluster
-- Port: 54320 (or whatever you set in step 6)
-- Username: postgres
-- Password: the one you set in step 4
+- host: the remote IP of your cluster
+- port: 54320 (or whatever you set in step 7)
+- username: postgres
+- password: the one you set in step 4
 
