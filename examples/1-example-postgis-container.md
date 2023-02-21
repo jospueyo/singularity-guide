@@ -1,7 +1,7 @@
 # example of successful container creation and usage
 A researcher needed a remote service running:
-- postgresql
-- postgis
+- `postgresql`
+- `postgis`
 
 So he could access it and have the ability to create databases,
 tables, install extensions, and also let the cluster do all the computation.
@@ -57,8 +57,10 @@ At this point we can compile the sandbox to a .sif file
 $ sudo singularity build pgcontainer.sif pgcontainer/
 ```
 Now we just need to send the pgcontainer.sif file to the cluster. There are a
-lot of options to do this, but one I like is magic-wormhole (pip install
-magic-wormhole)
+lot of options to do this, but one I like is magic-wormhole
+```
+pip install magic-wormhole
+```
 
 ## Step 7: run a new instance from the image file
 In the cluster, we create an instance of the container, mapping the "internal"
