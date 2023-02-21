@@ -16,14 +16,14 @@ $ sudo singularity build --sandbox pgcontainer docker://postgis/postgis
 This command creates a folder called "pgcontainer",
 but you can choose any name for it.
 
-Reference for the postgis container:
+Reference for the `postgis` container:
 https://registry.hub.docker.com/r/postgis/postgis/
 
 ## Step 2: enter the sandbox container using --writable mode
 ```
 $ sudo singularity shell --writable pgcontainer/
 ```
-Now we are inside the container.
+Now we are inside the container, and we can modify things because of the `--writable` option.
 
 ## Step 3: configure postgresql files
 ```
@@ -35,7 +35,7 @@ Singularity> su postgres -c "pg_ctl start" #start postgresql service
 ```
 
 ## Step 4: setup access password
-Log in into the psql console:
+Log in into the `psql` console:
 ```
 Singularity> su postgres -c psql
 ```
@@ -59,8 +59,8 @@ At this point we can compile the sandbox to a .sif file
 ```
 $ sudo singularity build pgcontainer.sif pgcontainer/
 ```
-Now we just need to send the pgcontainer.sif file to the cluster. There are a
-lot of options to do this, but one I like is magic-wormhole
+Now we just need to send the `pgcontainer.sif` file to the cluster. There are a
+lot of options to do this, but one I like is `magic-wormhole`
 ```
 pip install magic-wormhole
 ```
@@ -75,7 +75,7 @@ $ singularity instance start --writable-tmpfs \
   pgcontainer/ pgcontainer
 ```
 The instance will need to write to disk, so we use the
---writable-tmpfs argument to allocate some space in memory.
+`--writable-tmpfs` argument to allocate some space in memory.
 
 The --net and --network-args options allow the incoming traffic follow this path:
 ```
