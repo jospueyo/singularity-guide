@@ -20,6 +20,7 @@ but you can choose any name for it.
 ```
 $ sudo singularity shell --writable pgcontainer/
 ```
+Now we are inside the container.
 
 ## Step 3: configure postgresql files
 ```
