@@ -13,7 +13,8 @@ container in the ICRA's HPC cluster.
 ```
 $ sudo singularity build --sandbox pgcontainer docker://postgis/postgis
 ```
-This command creates a folder called "pgcontainer", but you can choose any name.
+This command creates a folder called "pgcontainer",
+but you can choose any name for it.
 
 ## Step 2: enter the sandbox container using --writable mode
 ```
