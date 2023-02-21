@@ -19,7 +19,7 @@ Enter the sandbox:
 ```
 $ sudo singularity shell --writable pgcontainer/
 ```
-Now we are inside the sandbox, and we can modify things because of the
+Now we are inside the sandbox, and we can modify files inside because of the
 `--writable` option.
 
 ## Step 3: configure postgresql files
