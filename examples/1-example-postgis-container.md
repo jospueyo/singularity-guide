@@ -91,6 +91,7 @@ $ singularity shell instance://pgcontainer
 Singularity> su postgres
 Singularity> pg_ctl start
 ```
+And now our container is ready to work, listening for connections.
 
 ## Step 8: final checks
 We check the postgresql status inside the container:
@@ -120,10 +121,10 @@ unix  2      [ ACC ]     STREAM     LISTENING     34074696 /var/run/postgresql/.
 ## Step 9: access the database
 If everything worked fine, now we should be able to access the database in the
 container using a client (e.g. psql, pgAdmin), or from python (library
-psycopg2)
+psycopg2):
 
-- host: the remote IP of your cluster
-- port: 54320 (or whatever you set in step 7)
-- username: postgres
-- password: the one you set in step 4
+- <b>host</b>: the remote IP of your cluster
+- <b>port</b>: 54320 (or whatever you set in step 7)
+- <b>username</b>: postgres
+- <b>password</b>: the one you set in step 4
 
