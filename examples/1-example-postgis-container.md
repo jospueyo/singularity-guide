@@ -1,5 +1,5 @@
 # example of successful container creation and usage
-A user needed a remote service running:
+A researcher needed a remote service running:
 - postgresql
 - postgis
 
