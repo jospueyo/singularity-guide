@@ -2,8 +2,8 @@
 A researcher needs a remote service running `postgresql` database with
 `postgis`.  He wants to create databases, tables, install extensions, etc.
 
-This guide is the summarized list of steps that were needed to configure and
-run a container in the ICRA's HPC cluster. This is useful for cluster admins.
+This guide summarizes the steps needed to configure and run a container in the
+ICRA's HPC cluster. It could be useful for cluster admins.
 
 ## Step 1: download the official postgis container image file and create a sandbox from it
 ```
