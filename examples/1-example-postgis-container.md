@@ -1,10 +1,7 @@
 # example of successful container creation and usage
-A researcher needed a remote service running:
-- `postgresql`
-- `postgis`
-
-So he could access it and have the ability to create databases,
-tables, install extensions, and also let the cluster do all the computation.
+A researcher needs a remote service running `postgresql` with `postgis`
+installed, so he can access it and create databases, tables, install
+extensions, and also let the cluster do all the computation.
 
 This is the summarized list of steps that were needed to configure and run a
 container in the ICRA's HPC cluster.
@@ -19,11 +16,11 @@ but you can choose any name for it.
 Reference for the `postgis` container:
 https://registry.hub.docker.com/r/postgis/postgis/
 
-## Step 2: enter the sandbox container using --writable mode
+## Step 2: enter the sandbox using --writable mode
 ```
 $ sudo singularity shell --writable pgcontainer/
 ```
-Now we are inside the container, and we can modify things because of the `--writable` option.
+Now we are inside the sandbox, and we can modify things because of the `--writable` option.
 
 ## Step 3: configure postgresql files
 ```
@@ -46,8 +43,8 @@ Enter new password: <new-password>
 postgres=# \q
 ```
 
-## Step 5: exit the sandbox container
-Now everything is configured, so we can leave the sandbox container.
+## Step 5: exit the sandbox
+Now everything is configured, so we can leave the sandbox.
 ```
 Singularity> su postgres -c "pg_ctl stop"
 Singularity> exit
