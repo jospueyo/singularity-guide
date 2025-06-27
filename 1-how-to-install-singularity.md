@@ -11,10 +11,11 @@ sudo apt install -y \
   pkg-config \
   squashfs-tools \
   cryptsetup \
-  crun \
+  runc \
   uidmap \
   golang
 ```
+\* In case `runc` raise an error, replace by `crun`.
 
 ## 2. download singularity:
 ```sh
